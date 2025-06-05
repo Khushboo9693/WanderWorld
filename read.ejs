@@ -1,0 +1,98 @@
+<% layout("/layouts/boilerplate.ejs") -%>
+    <style>
+          form{
+            display: inline-block;
+           
+          }
+    </style>
+
+<body>
+  
+  <div class="row">
+    <div class="col-md-8 offset-2">
+    <h2><%=data.title%></h2>
+    </div>
+    <div class="listing-card col-6 offset-2">
+       
+        <img src="<%=data.image.url%>" class="card-img-top show-img" alt="img">
+        <div class="card-body">
+          <p class="card-text"><br>
+            
+            <%=data.description%> <br>
+            ₹<%=data.price.toLocaleString("en-IN")%> <br>
+            <%=data.location%>, <%=data.country%> <br>
+          
+          </p>
+        </div>
+  </div>
+    </div >
+
+    <div class="offset-2">
+    <form action="/listings/<%=data._id%>/edit">
+        <button class="btn btn-primary read-btn">Edit</button >
+    </form>
+    
+    <form method="POST" action="/listings/<%=data._id%>?_method=DELETE">
+
+    <button class="btn btn-primary read-btn">
+        Delete
+    </button></form>
+  </div>
+
+  <hr>
+  <!-- getting reviews from user -->
+  <div class="offset-2 mt-2">
+    <h5>Leave A Review</h5>
+    <form method="post" action="/listings/<%=data._id%>/reviews" novalidate class="needs-validation">
+      <label  class="form-label mb-0">Rating</label><br>
+      <input style="width: 30%;" type="range"  class="form-range" name="Rating" max="5" min="1"  > 
+      <br>
+     
+      <div class="mt-2" >
+        <label  class="form-label mb-0">Comment</label>
+        <textarea class="form-control" rows="5" name="Comment" cols="100" required ></textarea>
+        <div class="invalid-feedback">
+          Comment can't be empty
+        </div>
+      </div>
+        <button class="btn btn-outline-dark mb-3  mt-2">
+          Submit
+        </button>
+
+    </form>
+
+    
+  </div>
+  <hr>
+  <!-- review render -->
+   <div class="offset-2">
+    <% let reviews = data.reviews; %>
+    <% if(reviews.length!=0) {%>
+    <h5>All Reviews</h5>
+    <%}%>
+   
+    <div class="row">
+    <%for(let i=0;i<reviews.length;i++) {%>
+      <div class="card card-review col-5 mb-2 ms-2">
+        <div class="card-body">
+          <h5 class="card-title">DeadShot</h5>
+          
+          <p class="card-text">
+            
+            <%=reviews[i].comment%>  <br>
+           <%=reviews[i].rating%> starts
+       </p>  
+       <div class="mb-2">
+        <form method="post" action="/listings/<%=data._id%>/reviews/<%=reviews[i]._id%>?_method=DELETE">
+          <button class="btn btn-danger ms-0 btn-sm">Delete</button>
+        </form>
+       
+      </div>
+          </div>
+      </div>
+      
+      <% }%>
+   </div>
+  </div>
+</body>
+</html>

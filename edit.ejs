@@ -1,0 +1,71 @@
+<% layout("/layouts/boilerplate.ejs") -%>
+
+    <style>
+        input{
+            width: 300px;
+        }
+    </style>
+    <body>
+        
+        <div class="row">
+          <div class="col-md-8 offset-2">
+      
+    <h3>Edit the info</h3>
+    <form method="POST" action="/listings/<%=data._id%>?_method=PUT" novalidate class="needs-validation" >
+        <div class="mb-3">
+            <label  class="form-label" for="">Title</label>
+            <input  required class="form-control" type="text" name="title" placeholder="Title" value="<%=data.title%>">
+            <div class="valid-feedback">Title is valid</div>
+            <div class="invalid-feedback">Title is invalid</div>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" for="">Description</label>
+            <textarea required class="form-control" name="description" rows="5" cols="40" placeholder="Description"><%=data.description%></textarea>
+            <div class="valid-feedback">Description is valid</div>
+            <div class="invalid-feedback">Description is invalid</div>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" for="">Description</label>
+            <input required class="form-control" type="text" name="url" placeholder="Image Url" value="<%=data.image.url%>">
+            <div class="valid-feedback">Url is valid</div>
+            <div class="invalid-feedback">Url is invalid</div>
+        </div>
+        <div class="mb-3">
+            <label class="form-label" for="">Price</label>
+            <input required class="form-control" type="number" name="price" placeholder="price" value="<%=data.price%>">
+            <div class="valid-feedback">Price is valid</div>
+            <div class="invalid-feedback">Price is invalid</div>
+        </div>
+
+       
+        <div class="row">
+
+       
+            <div class="mb-3 col-md-4">
+                <label class="form-label" for="">Location</label>
+                <input required class="form-control" type="text" name="location" placeholder="location" value="<%=data.location%>">
+                <div class="valid-feedback">Location is valid</div>
+                <div class="invalid-feedback">Location is invalid</div>
+            </div>
+        <div class="mb-3 col-md-8">
+            <label class="form-label" for="">Country</label>
+               
+        <input required class="form-control" type="text" name="country" placeholder="country" value="<%=data.country%>">
+        <div class="valid-feedback">Country is valid</div>
+        <div class="invalid-feedback">`Country is invalid</div>
+        </div>
+    </div>
+        
+       
+       
+
+        
+        <button class="btn btn-primary edit-btn">Submit</button>
+        <br><br>
+    </form>
+</div>  
+</div>
+</body>
+</html>
